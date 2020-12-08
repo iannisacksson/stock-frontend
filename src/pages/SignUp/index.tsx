@@ -11,18 +11,23 @@ import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErros';
 
-import logoImg from '../../assets/logo.svg';
-
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Select from '../../components/Select';
 
-import { Container, Content, Background, AnimationContainer } from './styles';
+import { Container, Content, AnimationContainer } from './styles';
 
 interface SignUpFormData {
   name: string;
   email: string;
   password: string;
+  role: string;
 }
+
+const options = [
+  { value: 'admin', label: 'Administrador' },
+  { value: 'user', label: 'Usuário' },
+];
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -31,6 +36,7 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
+      console.log(data);
       try {
         formRef.current?.setErrors({});
 
@@ -76,11 +82,8 @@ const SignUp: React.FC = () => {
 
   return (
     <Container>
-      <Background />
       <Content>
         <AnimationContainer>
-          <img src={logoImg} alt="Logo" />
-
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu cadastro</h1>
 
@@ -98,6 +101,8 @@ const SignUp: React.FC = () => {
               type="password"
               placeholder="Senha"
             />
+
+            <Select options={options} name="role" />
 
             <Button type="submit">Entrar</Button>
           </Form>
