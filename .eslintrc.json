@@ -36,6 +36,7 @@
     "react/jsx-one-expression-per-line": "off",
     "import/no-duplicates": "off",
     "@typescript-eslint/camelcase": "off",
+    "jsx-a11y/control-has-associated-label": "off",
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {
