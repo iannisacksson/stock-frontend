@@ -3,6 +3,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { FiEdit, FiDelete } from 'react-icons/fi';
 import { Container, TableContainer, TableButton } from './styles';
 import Category from '../Category';
+import Variant from '../Variant';
 
 import Header from '../../components/Header';
 import Button from '../../components/Button';
@@ -19,31 +20,31 @@ interface Sku {
   };
 }
 
-interface Data {
-  seccuss: boolean;
-  data: {
-    skus: Sku[];
-    page: number;
-    total: number;
-  };
-}
-
 const Dashboard: React.FC = () => {
   const [skus, setSkus] = useState<Sku[]>([]);
-  const [modalIsOpen, setModelIsOpen] = useState<boolean>(false);
+  const [categoryIsOpen, setCategoryIsOpen] = useState<boolean>(false);
+  const [variantIsOpen, setVariantIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    api.get<Data>('/skus').then(response => {
+    api.get('/skus').then(response => {
       setSkus(response.data.data.skus);
     });
-  }, [skus]);
-
-  const handleOpenModal = useCallback(() => {
-    setModelIsOpen(true);
   }, []);
 
-  const handleCloseModal = useCallback(() => {
-    setModelIsOpen(false);
+  const handleOpenCategory = useCallback(() => {
+    setCategoryIsOpen(true);
+  }, []);
+
+  const handleCloseCategory = useCallback(() => {
+    setCategoryIsOpen(false);
+  }, []);
+
+  const handleOpenVariant = useCallback(() => {
+    setVariantIsOpen(true);
+  }, []);
+
+  const handleCloseVariant = useCallback(() => {
+    setVariantIsOpen(false);
   }, []);
 
   return (
@@ -52,10 +53,14 @@ const Dashboard: React.FC = () => {
         <Header />
 
         <TableButton>
-          <Button type="button" onClick={() => handleOpenModal()}>
+          <Button type="button" onClick={() => handleOpenCategory()}>
             Adicionar Categorias
           </Button>
-          <Button type="button">Adicionar Produtos</Button>
+          <Button type="button" onClick={() => handleOpenVariant()}>
+            Adicionar Variações
+          </Button>
+          <Button type="button">Adicionar Variações de produto</Button>
+          <Button type="button">Adicionar Variações de produto</Button>
           <Button type="button">Adicionar Variações de produto</Button>
         </TableButton>
 
@@ -94,7 +99,8 @@ const Dashboard: React.FC = () => {
           </table>
         </TableContainer>
       </Container>
-      <Category isOpen={modalIsOpen} handleClick={handleCloseModal} />
+      <Category isOpen={categoryIsOpen} handleClick={handleCloseCategory} />
+      <Variant isOpen={variantIsOpen} handleClick={handleCloseVariant} />
     </>
   );
 };

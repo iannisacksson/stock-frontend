@@ -41,7 +41,7 @@ const Category: React.FC<CategoryProps> = ({ isOpen, handleClick }) => {
 
   useEffect(() => {
     api
-      .get<Data>('/variant-categories', {
+      .get('/variant-categories', {
         params: {
           limit: 50,
           page: 1,
@@ -50,7 +50,7 @@ const Category: React.FC<CategoryProps> = ({ isOpen, handleClick }) => {
       .then(response => {
         setCategories(response.data.data.variantCategories);
       });
-  }, [categories]);
+  }, []);
 
   const handleSubmit = useCallback(
     async (data: CategoryFormData) => {
