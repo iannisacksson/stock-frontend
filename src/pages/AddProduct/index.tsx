@@ -82,7 +82,7 @@ const AddProduc: React.FC<ProductProps> = ({
         onRequestClose={handleClick}
         contentLabel="Example Modal"
       >
-        <h2>Adicionar uma novo produto</h2>
+        <h2>Adicionar um novo produto</h2>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input name="name" type="text" placeholder="Nome da produto" />
           <Input

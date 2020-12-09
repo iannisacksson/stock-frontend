@@ -98,7 +98,7 @@ const Category: React.FC<CategoryProps> = ({ isOpen, handleClick }) => {
         onRequestClose={handleClick}
         contentLabel="Example Modal"
       >
-        <h2>Adicionar uma nova </h2>
+        <h2>Adicionar uma nova categoria de variação</h2>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Input name="name" type="text" placeholder="Nome da categia" />
 

@@ -146,7 +146,7 @@ const OrderSku: React.FC<ProductProps> = ({ isOpen, handleClick }) => {
         onRequestClose={handleClick}
         contentLabel="Example Modal"
       >
-        <h2>Adicionar uma novo produto</h2>
+        <h2>Montar ordem de prioridade da SKU</h2>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <Select options={products} name="product_id" placeholder="Produtos" />
 
