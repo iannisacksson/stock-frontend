@@ -14,7 +14,7 @@ const Header: React.FC = () => {
           <LinkElement to="/dashboard" exact>
             Listagem
           </LinkElement>
-          <LinkElement to="/add">Adicionar</LinkElement>
+          <LinkElement to="/product">Produtos</LinkElement>
         </nav>
 
         <button type="button" onClick={signOut}>

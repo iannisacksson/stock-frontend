@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { FiEdit, FiDelete } from 'react-icons/fi';
 import { Container, TableContainer, TableButton } from './styles';
 import Category from '../Category';
 import Variant from '../Variant';
@@ -59,9 +58,6 @@ const Dashboard: React.FC = () => {
           <Button type="button" onClick={() => handleOpenVariant()}>
             Adicionar Variações
           </Button>
-          <Button type="button">Adicionar Variações de produto</Button>
-          <Button type="button">Adicionar Variações de produto</Button>
-          <Button type="button">Adicionar Variações de produto</Button>
         </TableButton>
 
         <TableContainer>
@@ -72,8 +68,6 @@ const Dashboard: React.FC = () => {
                 <th>SKU</th>
                 <th>Quantidade</th>
                 <th>Preço</th>
-                <th />
-                <th>Opções</th>
               </tr>
             </thead>
             <tbody>
@@ -83,16 +77,6 @@ const Dashboard: React.FC = () => {
                   <td>{sku.code}</td>
                   <td>{sku.quantity}</td>
                   <td>{sku.price}</td>
-                  <td>
-                    <button type="button">
-                      <FiEdit />
-                    </button>
-                  </td>
-                  <td>
-                    <button type="button">
-                      <FiDelete />
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>
