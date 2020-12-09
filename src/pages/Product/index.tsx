@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Container, TableContainer, TableButton } from './styles';
 import AddProduct from '../AddProduct';
 import UpdateProduct from '../UpdateProduct';
+import ShowProduct from '../ShowProduct ';
 import OrderSku from '../OrderSku';
 
 import { useToast } from '../../hooks/toast';
@@ -27,6 +28,8 @@ const Product: React.FC = () => {
   const [orderSkuIsOpen, setOrderSkuIsOpen] = useState<boolean>(false);
   const [updateProductIsOpen, setUpdateProductOpen] = useState<boolean>(false);
   const [updateProduct, setUpdateProduct] = useState<Product>({} as Product);
+  const [showProduct, setShowProduct] = useState<Product>({} as Product);
+  const [showProductIsOpen, setShowProductOpen] = useState<boolean>(false);
   const { addToast } = useToast();
   const formRef = useRef<FormHandles>(null);
 
@@ -47,6 +50,18 @@ const Product: React.FC = () => {
   const handleOpenUpdateProduct = useCallback(() => {
     setUpdateProductOpen(!updateProductIsOpen);
   }, [updateProductIsOpen]);
+
+  const handleOpenShowProduct = useCallback(() => {
+    setShowProductOpen(!showProductIsOpen);
+  }, [showProductIsOpen]);
+
+  const handleShowProduct = useCallback(
+    (product: Product) => {
+      handleOpenShowProduct();
+      setShowProduct(product);
+    },
+    [handleOpenShowProduct],
+  );
 
   const handleUpdateProduct = useCallback(
     (product: Product) => {
@@ -168,7 +183,7 @@ const Product: React.FC = () => {
                   <td>{product.identifier_code}</td>
                   <td>
                     <button type="button">
-                      <FiEye />
+                      <FiEye onClick={() => handleShowProduct(product)} />
                     </button>
                   </td>
                   <td>
@@ -202,6 +217,11 @@ const Product: React.FC = () => {
         handleUpdateProductState={handleUpdateProductState}
       />
       <OrderSku isOpen={orderSkuIsOpen} handleClick={handleOpenOrderSku} />
+      <ShowProduct
+        isOpen={showProductIsOpen}
+        handleClick={handleOpenShowProduct}
+        showProduct={showProduct}
+      />
     </>
   );
 };
