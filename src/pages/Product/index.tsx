@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Container, TableContainer, TableButton } from './styles';
 import AddProduct from '../AddProduct';
 import UpdateProduct from '../UpdateProduct';
+import OrderSku from '../OrderSku';
 
 import { useToast } from '../../hooks/toast';
 
@@ -23,6 +24,7 @@ interface Product {
 const Product: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [addProductIsOpen, setProductIsOpen] = useState<boolean>(false);
+  const [orderSkuIsOpen, setOrderSkuIsOpen] = useState<boolean>(false);
   const [updateProductIsOpen, setUpdateProductOpen] = useState<boolean>(false);
   const [updateProduct, setUpdateProduct] = useState<Product>({} as Product);
   const { addToast } = useToast();
@@ -37,6 +39,10 @@ const Product: React.FC = () => {
   const handleOpenProduct = useCallback(() => {
     setProductIsOpen(!addProductIsOpen);
   }, [addProductIsOpen]);
+
+  const handleOpenOrderSku = useCallback(() => {
+    setOrderSkuIsOpen(!orderSkuIsOpen);
+  }, [orderSkuIsOpen]);
 
   const handleOpenUpdateProduct = useCallback(() => {
     setUpdateProductOpen(!updateProductIsOpen);
@@ -81,7 +87,7 @@ const Product: React.FC = () => {
     [products, addToast],
   );
 
-  const handleUpdateFood = useCallback(
+  const handleUpdateProductState = useCallback(
     async (product: Product) => {
       try {
         formRef.current?.setErrors({});
@@ -139,7 +145,9 @@ const Product: React.FC = () => {
           <Button type="button" onClick={() => handleOpenProduct()}>
             Adicionar Produto
           </Button>
-          <Button type="button">Adicionar Variações</Button>
+          <Button type="button" onClick={() => handleOpenOrderSku()}>
+            Montar ordem de prioridade da SKU
+          </Button>
         </TableButton>
 
         <TableContainer>
@@ -191,8 +199,9 @@ const Product: React.FC = () => {
         isOpen={updateProductIsOpen}
         handleClick={handleOpenUpdateProduct}
         editProduct={updateProduct}
-        handleUpdateFood={handleUpdateFood}
+        handleUpdateProductState={handleUpdateProductState}
       />
+      <OrderSku isOpen={orderSkuIsOpen} handleClick={handleOpenOrderSku} />
     </>
   );
 };

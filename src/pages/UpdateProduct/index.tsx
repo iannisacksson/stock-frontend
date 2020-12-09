@@ -15,7 +15,7 @@ interface Product {
 interface ProductProps {
   isOpen: boolean;
   handleClick: () => void;
-  handleUpdateFood: (product: Product) => void;
+  handleUpdateProductState: (product: Product) => void;
   editProduct: Product;
 }
 
@@ -23,15 +23,15 @@ const UpdateProduc: React.FC<ProductProps> = ({
   isOpen,
   handleClick,
   editProduct,
-  handleUpdateFood,
+  handleUpdateProductState,
 }) => {
   const formRef = useRef<FormHandles>(null);
 
   const handleSubmit = useCallback(
     async (data: Product) => {
-      handleUpdateFood(data);
+      handleUpdateProductState(data);
     },
-    [handleUpdateFood],
+    [handleUpdateProductState],
   );
 
   return (
